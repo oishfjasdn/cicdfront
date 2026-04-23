@@ -48,7 +48,7 @@ jobs:
         with:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY_WZTJ }}
           REMOTE_HOST: 1p.wztj.net
-          REMOTE_USER: root
+          REMOTE_USER: cicd
           REMOTE_PORT: 22
           ARGS: "-avzr --delete"
           SOURCE: dist/*
