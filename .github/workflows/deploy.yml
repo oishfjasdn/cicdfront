@@ -41,16 +41,15 @@ jobs:
         run: pnpm run build
 
       # 6. 部署到远程服务器（目录参照步骤 2 ）
-      - name: Deploy to server
+      - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          TARGET: /opt/1panel/www/sites/cicd.wztj.net/index
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY_WZTJ }}
-          REMOTE_HOST: 1p.wztj.net
-          REMOTE_USER: cicd
-          REMOTE_PORT: 22
+          REMOTE_HOST: "1p.wztj.net"
+          REMOTE_USER: cicd       # 用 cicd 用户
+          REMOTE_PORT: "22"
+          SOURCE: "dist/*"
+          TARGET: "/opt/1panel/www/sites/cicd.wztj.net/index"
           ARGS: "-avzr --delete"
-          SOURCE: dist/*
-          TARGET: ${{ env.TARGET }}
           SCRIPT_AFTER: chmod -R 750 ${{ env.TARGET }} # 可选指令，指定比较安全的权限
