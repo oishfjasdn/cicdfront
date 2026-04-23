@@ -3,13 +3,13 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
     inputs:
       branch:
         description: "Branch to deploy"
         required: true
-        default: "master"
+        default: "main"
 
 jobs:
   build-and-deploy:
